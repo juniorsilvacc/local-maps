@@ -6,7 +6,7 @@ import HomePage from './pages/Home';
 function App() {
 
   const theme = {
-    primary: "#322153",
+    primary: "#253238",
     secondery: "#6c63ff",
     background: "#F0F0F5",
     text: "#6C6C80",
