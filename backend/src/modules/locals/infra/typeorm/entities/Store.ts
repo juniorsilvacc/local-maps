@@ -1,9 +1,9 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 
 @Entity('stores')
 class Store {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
@@ -18,10 +18,10 @@ class Store {
   @Column()
   contact: string;
 
-  @Column()
+  @Column('double precision')
   latitude: number;
 
-  @Column()
+  @Column('double precision')
   longitude: number;
 
   constructor() {

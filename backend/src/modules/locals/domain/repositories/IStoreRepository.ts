@@ -4,6 +4,7 @@ import { ICreateStoreDTO } from '../dtos/ICreateStoreDTO';
 interface IStoreRepository {
   create(data: ICreateStoreDTO): Promise<Store>;
   findByName(name: string): Promise<Store | undefined>;
+  findAll(): Promise<Store[]>;
 }
 
 export { IStoreRepository };

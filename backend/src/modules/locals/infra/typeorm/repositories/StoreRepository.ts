@@ -10,6 +10,12 @@ class StoreRepository implements IStoreRepository {
     this.repository = getRepository(Store);
   }
 
+  async findAll(): Promise<Store[]> {
+    const all = await this.repository.find();
+
+    return all;
+  }
+
   async findByName(name: string): Promise<Store | undefined> {
     const store = await this.repository.findOne({ name });
 
