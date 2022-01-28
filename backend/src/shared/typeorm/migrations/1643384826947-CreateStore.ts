@@ -29,11 +29,11 @@ export class CreateStore1643384826947 implements MigrationInterface {
           },
           {
             name: 'latitude',
-            type: 'integer',
+            type: 'numeric',
           },
           {
             name: 'longitude',
-            type: 'integer',
+            type: 'numeric',
           },
         ],
       }),
