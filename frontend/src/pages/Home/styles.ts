@@ -18,7 +18,7 @@ export const Title = styled.h1`
   padding-bottom: 35px;
   text-align: center;
   max-width: 500px;
-  @media (max-width: 481px) {
+  @media (max-width: 480px) {
     font-size: 42px;
   }
 `;
@@ -38,11 +38,10 @@ export const SubTitle = styled.p`
   }
 `;
 
-
 export const Button = styled.button`
-  background-color: ${(props) => props.theme.primary};
+  background-color: ${(props) => props.theme.secondery};
   color: ${(props) => props.theme.white};
-  font-weight: 500;
+  font-weight: 600;
   width: 350px;
   height: 60px;
   border: none;
@@ -51,7 +50,7 @@ export const Button = styled.button`
   &:hover {
     filter: opacity(0.9);
   }
-  @media (max-width: 481px) {
+  @media (max-width: 480px) {
     width: 300px;
     font-size: 16px;
   }

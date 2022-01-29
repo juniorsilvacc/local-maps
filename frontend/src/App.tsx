@@ -2,12 +2,14 @@ import {ThemeProvider} from 'styled-components';
 import {BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import HomePage from './pages/Home';
+import NewPage from './pages/New'
 
 function App() {
 
   const theme = {
     primary: "#253238",
-    secondery: "#6c63ff",
+    secondery: "#7e57c2",
+    backgroundIcon: "#e4d6ff",
     background: "#F0F0F5",
     text: "#6C6C80",
     white: "#FFFFFF"
@@ -21,7 +23,9 @@ function App() {
             <HomePage/>
           </Route>
             
-          <Route path="/new">Renderizando a new</Route>
+          <Route path="/new">
+            <NewPage/>
+          </Route>
         </Switch>
       </BrowserRouter>
     </ThemeProvider>
