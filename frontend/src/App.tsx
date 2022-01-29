@@ -2,7 +2,10 @@ import {ThemeProvider} from 'styled-components';
 import {BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import HomePage from './pages/Home';
-import NewPage from './pages/New'
+import NewPage from './pages/New';
+
+import "react-toastify/dist/ReactToastify.css";
+import {ToastContainer} from 'react-toastify';
 
 function App() {
 
@@ -28,6 +31,7 @@ function App() {
           </Route>
         </Switch>
       </BrowserRouter>
+      <ToastContainer/>
     </ThemeProvider>
   );
 }

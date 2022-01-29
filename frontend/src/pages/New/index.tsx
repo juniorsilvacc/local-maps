@@ -15,21 +15,58 @@ import Input from '../../components/Input';
 import {categories} from './categories';
 
 import {useState} from 'react';
-import {LatLngExpression} from 'leaflet';
+import {LatLngExpression, LeafletMouseEvent} from 'leaflet';
 import {TileLayer, Marker} from 'react-leaflet';
 
+import useGetLocation from '../../hooks/useGetLocation';
+
+import {toast} from 'react-toastify';
+import { useHistory } from "react-router-dom";
+
 export default function New(){
+
+  const history = useHistory()
 
   const [formValues, setFormValues] = useState({
     name: '',
     description: '',
     contact: '',
-    category: ''
-  })
+    category: '',
+    coords: [0, 0]
+  });
+
+  const {coords} = useGetLocation()
+
+  async function onSubmit () {
+    const request = await fetch('http://localhost:3333/stores', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        ...formValues,
+        latitude: formValues.coords[0],
+        longitude: formValues.coords[1]
+      })
+    })
+
+    if(request.ok) {
+      toast('Estabelecimento cadastrado com sucesso!', {
+        type: 'success',
+        autoClose: 2000,
+        onClose: () => history.push('/')
+      })
+    }
+  }
+
+  if(!coords){
+    return <h1>Obtendo Localização</h1>
+  }
 
   return (
     <Container>
-      <Form>
+      <Form onSubmit={(ev) => {
+        ev.preventDefault();
+        onSubmit();
+      }}>
         <FormTitle>
           Cadastro de Localização
         </FormTitle>
@@ -65,11 +102,15 @@ export default function New(){
 
 
         <MapContainer center={{
-          lat: 7.022606944207497,
-          lng: 7.022606944207497,
+          lat: coords[0],
+          lng: coords[1],
         } as LatLngExpression }
           zoom={13}
-          whenCreated={() => {}}
+          whenCreated={(map) => {
+            map.addEventListener('click', (event: LeafletMouseEvent) => {
+              setFormValues(prev => ({...prev, coords: [event.latlng.lat, event.latlng.lng]}))
+            })
+          }}
         >
 
         <TileLayer
@@ -78,7 +119,7 @@ export default function New(){
         />
 
         <Marker
-          position={[12, 23] as LatLngExpression}
+          position={[formValues.coords[0], formValues.coords[1]] as LatLngExpression}
         />
 
         </MapContainer>
